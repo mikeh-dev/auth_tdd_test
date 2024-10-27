@@ -1,15 +1,15 @@
 <h1>Sign In</h1>
 
 <%= form_with url: sign_in_path do |form| %>
-   <form>
     <div class="form-group mb-3">
       <%= form.label :email %>
       <%= form.email_field :email, class: "form-control", placeholder: "Email" %>
     </div>
     <div class="form-group mb-3">
       <%= form.label :password %>
-      <%= form.password_field :password, class: "form-control", placeholder: "Password" %>
+      <%= form.password_field :password, class: "form-control", placeholder: "Password" %> 
+      <%= link_to "Forgot Password", password_reset_path %>
     </div>
       <%= form.submit "Sign In", class: "btn btn-primary"  %>
-  </form>
-<% end %>
+  <% end %>
+</form>
