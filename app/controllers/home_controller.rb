@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   def index
-    flash[:notice] = "This is a notice"
-    flash[:alert] = "This is an alert"
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+    end
   end
 
   def about

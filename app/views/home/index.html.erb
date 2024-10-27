@@ -1,3 +1,9 @@
 <div class="d-flex align-items-center justify-content-center">
     <h1 class="text-center">Home#index</h1>
+
+    <% if @user %>
+      <p>Welcome, <%= @user.email %></p>
+    <% else %>
+      <p>Please sign up or sign in</p>
+    <% end %>
 </div>
