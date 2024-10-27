@@ -8,6 +8,10 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 # that will avoid rails generators crashing because migrations haven't been run yet
 # return unless Rails.env.test?
 require 'rspec/rails'
+require 'capybara/rspec'
+require 'webdrivers'
+require 'selenium-webdriver'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -39,7 +43,11 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
+
+  config.before(:each, type: :system) do
+    driven_by :selenium_chrome_headless
+  end
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
@@ -63,4 +71,19 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  # Capybara
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
+  end
+  
+  Capybara.register_driver :selenium_chrome_headless do |app|
+    options = ::Selenium::WebDriver::Chrome::Options.new
+    options.args << '--headless'
+    options.args << '--disable-gpu' 
+    options.args << '--no-sandbox' 
+  
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  end
+  
+  Capybara.javascript_driver = :selenium_chrome_headless
 end
