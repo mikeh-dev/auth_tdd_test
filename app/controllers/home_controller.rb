@@ -3,4 +3,7 @@ class HomeController < ApplicationController
     flash[:notice] = "This is a notice"
     flash[:alert] = "This is an alert"
   end
+
+  def about
+  end
 end
