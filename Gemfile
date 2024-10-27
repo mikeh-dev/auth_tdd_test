@@ -16,6 +16,10 @@ gem "bcrypt", "~> 3.1.7"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
+group :development do
+  gem "web-console"
+end
+
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "rspec-rails"
@@ -23,8 +27,5 @@ group :development, :test do
   gem "faker"
   gem "shoulda-matchers"
   gem "capybara"
-end
-
-group :development do
-  gem "web-console"
+  gem 'selenium-webdriver'
 end
