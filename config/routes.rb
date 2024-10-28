@@ -20,6 +20,5 @@ Rails.application.routes.draw do
   get "password/reset/edit", to: "password_resets#edit"
   patch "password/reset/edit", to: "password_resets#update"
 
-  resources :account_activations, only: [:edit], as: :account_activation
-
+  resources :account_activations, only: [:edit]
 end
